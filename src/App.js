@@ -1,10 +1,10 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
 import Options from "./Options";
 import GameBoard from "./GameBoard";
-import { makeGameBoard, generateId } from './RabbitWolfGameClass';
+import { createCurrentMatrix, generateId, moveCharacters } from './RabbitWolfGameClass';
 import { gameFieldStatus, makeGameField } from "./redux/features/gameReducerSlice";
 import { selectedSize } from "./redux/features/sizeReducerSlice";
 import { selectedBoard } from './redux/features/boardReducerSlice';

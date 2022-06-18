@@ -231,16 +231,29 @@ export const moveCharacters = (moveDirection, matrix, size) => {
   };
 
   const getCharactersPositions = (direction, matrix) => {
-    let wolvesCurrentPositions = getCharactersCurrentPosition(WOLF, matrix);
-    let rabbitNewPosition = getRabbitNewPosition(direction);
+    let rabbitNewPosition;
+    let wolvesCurrentPositions;
+    if(direction !== undefined){
+      rabbitNewPosition = getRabbitNewPosition(direction);
+      wolvesCurrentPositions = undefined;
+      
+    }else{
+      rabbitNewPosition = getCharactersCurrentPosition(RABBIT)[X];
+      wolvesCurrentPositions = getCharactersCurrentPosition(WOLF);
+    }
+
     return {
       wolvesCurrentPositions,
       rabbitNewPosition,
     };
   };
 
+  
+
   const determineWinnerCharacter = () => {
-    if (!getCharactersCurrentPosition(RABBIT)[X]) {
+    const WOLF_COUNT = (size * 40) / 100;
+    if (!getCharactersCurrentPosition(RABBIT)[X] ||
+      getCharactersCurrentPosition(WOLF).length < WOLF_COUNT) {
       return CHARACTERS[WOLF].name;
     } else if (!getCharactersCurrentPosition(HOUSE)[X]) {
       return CHARACTERS[RABBIT].name;
@@ -259,9 +272,18 @@ export const moveCharacters = (moveDirection, matrix, size) => {
 
   const POSITIONS = getCharactersPositions(moveDirection);
 
-  updateWolvesPositions(POSITIONS);
+  const gameResult = () => {
+    let winnerCharacter;
 
-  const WINNER_CHARACTER = decideGameCourse();
+    if(POSITIONS.wolvesCurrentPositions === undefined){
+      winnerCharacter = decideGameCourse();
+      return [matrix, winnerCharacter];
+    }else{
+      updateWolvesPositions(POSITIONS);
+      winnerCharacter = decideGameCourse();
+      return [matrix, winnerCharacter];
+    }
+  }
 
-  return [matrix, WINNER_CHARACTER];
+  return gameResult();
 };

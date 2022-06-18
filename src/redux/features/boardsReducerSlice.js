@@ -14,7 +14,7 @@ export const boardsReducer = (state = [], action) => {
       return board;
     });
   }
-  
+
   return state;
 }
 

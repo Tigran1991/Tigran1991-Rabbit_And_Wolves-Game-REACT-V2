@@ -1,10 +1,10 @@
-import { memo, React, useCallback }  from 'react';
+import { memo, React, useCallback, useEffect }  from 'react';
 import { useDispatch } from 'react-redux';
 
 import './App.css';
 import Playfield from './Playfield';
 import ButtonElements from './ButtonElements';
-import { makeGameBoard } from './RabbitWolfGameClass';
+import { moveCharacters } from './RabbitWolfGameClass';
 import { updateBoard } from './redux/features/boardsReducerSlice';
 
 const GameBoard = memo(({ boardData }) => {
@@ -21,7 +21,7 @@ const GameBoard = memo(({ boardData }) => {
     const WINNER = boardData.winner;
 
     const UPDATE_BOARD = useCallback(sideMove => {
-        const [updatedMatrix, winnerCharacter] = makeGameBoard(sideMove, MATRIX, SIZE);
+        const [updatedMatrix, winnerCharacter] = moveCharacters(sideMove, MATRIX, SIZE);
         dispatch(updateBoard({
             id: ID,
             size: SIZE,
@@ -29,6 +29,22 @@ const GameBoard = memo(({ boardData }) => {
             winner: winnerCharacter, 
         }))
     }, [ID, SIZE, MATRIX, dispatch]);
+
+    useEffect(() => {
+        let interval;
+        if(WINNER == undefined){
+            interval = setInterval((sideMove) => {
+                const [updatedMatrix, winnerCharacter] = moveCharacters(sideMove, MATRIX, SIZE);
+                dispatch(updateBoard({
+                    id: ID,
+                    size: SIZE,
+                    matrix: updatedMatrix,
+                    winner: winnerCharacter, 
+                }))
+            }, 3000);
+        }
+        return () => clearInterval(interval);       
+    }, [WINNER]);
 
     const boardStyle = {
         width: CELL_SIZE * SIZE + WIDTH_INDEX,
