@@ -32,7 +32,7 @@ const GameBoard = memo(({ boardData }) => {
 
     useEffect(() => {
         let interval;
-        if(WINNER == undefined){
+        if(WINNER === undefined){
             interval = setInterval((sideMove) => {
                 const [updatedMatrix, winnerCharacter] = moveCharacters(sideMove, MATRIX, SIZE);
                 dispatch(updateBoard({
@@ -44,7 +44,7 @@ const GameBoard = memo(({ boardData }) => {
             }, 3000);
         }
         return () => clearInterval(interval);       
-    }, [WINNER]);
+    }, [ID, SIZE, MATRIX, dispatch, WINNER]);
 
     const boardStyle = {
         width: CELL_SIZE * SIZE + WIDTH_INDEX,
