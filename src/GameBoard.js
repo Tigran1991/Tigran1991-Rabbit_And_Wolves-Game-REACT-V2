@@ -20,31 +20,25 @@ const GameBoard = memo(({ boardData }) => {
     const MATRIX = boardData.matrix;
     const WINNER = boardData.winner;
 
-    const UPDATE_BOARD = useCallback(sideMove => {
+    const makeUpdateBoard = sideMove => {
         const [updatedMatrix, winnerCharacter] = moveCharacters(sideMove, MATRIX, SIZE);
         dispatch(updateBoard({
             id: ID,
             size: SIZE,
             matrix: updatedMatrix,
-            winner: winnerCharacter, 
+            winner: winnerCharacter,
         }))
-    }, [ID, SIZE, MATRIX, dispatch]);
+    }
+
+    const updateBoardData = useCallback(makeUpdateBoard, [ID, SIZE, MATRIX, dispatch]);
 
     useEffect(() => {
         let interval;
         if(WINNER === undefined){
-            interval = setInterval((sideMove) => {
-                const [updatedMatrix, winnerCharacter] = moveCharacters(sideMove, MATRIX, SIZE);
-                dispatch(updateBoard({
-                    id: ID,
-                    size: SIZE,
-                    matrix: updatedMatrix,
-                    winner: winnerCharacter, 
-                }))
-            }, 3000);
+            interval = setInterval(makeUpdateBoard, 3000);
         }
         return () => clearInterval(interval);       
-    }, [ID, SIZE, MATRIX, dispatch, WINNER]);
+    });
 
     const boardStyle = {
         width: CELL_SIZE * SIZE + WIDTH_INDEX,
@@ -64,7 +58,7 @@ const GameBoard = memo(({ boardData }) => {
 
             {
                 WINNER === undefined &&
-                <ButtonElements updateMatrix={UPDATE_BOARD} key={'buttonsDiv' + ID} />
+                <ButtonElements updateMatrix={updateBoardData} key={'buttonsDiv' + ID} />
             }
         </div>           
     )

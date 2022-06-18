@@ -102,7 +102,7 @@ export const moveCharacters = (moveDirection, matrix, size) => {
     const CHARACTER_POSITION = new Array(0);
     matrix.forEach((elem, elemIndex) => {
       if (elem.includes(character)) {
-        elem.filter((item, index) => {
+        elem.forEach((item, index) => {
           if (item === character) {
             CHARACTER_POSITION.push(Array.of(elemIndex, index));
           }
@@ -230,7 +230,7 @@ export const moveCharacters = (moveDirection, matrix, size) => {
     );
   };
 
-  const getCharactersPositions = (direction, matrix) => {
+  const getCharactersPositions = (direction) => {
     let rabbitNewPosition;
     let wolvesCurrentPositions;
     if(direction !== undefined){
