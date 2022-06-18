@@ -235,8 +235,7 @@ export const moveCharacters = (moveDirection, matrix, size) => {
     let wolvesCurrentPositions;
     if(direction !== undefined){
       rabbitNewPosition = getRabbitNewPosition(direction);
-      wolvesCurrentPositions = undefined;
-      
+      wolvesCurrentPositions = null;
     }else{
       rabbitNewPosition = getCharactersCurrentPosition(RABBIT)[X];
       wolvesCurrentPositions = getCharactersCurrentPosition(WOLF);
@@ -275,7 +274,7 @@ export const moveCharacters = (moveDirection, matrix, size) => {
   const gameResult = () => {
     let winnerCharacter;
 
-    if(POSITIONS.wolvesCurrentPositions === undefined){
+    if(POSITIONS.wolvesCurrentPositions === null){
       winnerCharacter = decideGameCourse();
       return [matrix, winnerCharacter];
     }else{

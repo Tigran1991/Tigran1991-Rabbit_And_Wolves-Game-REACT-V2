@@ -1,15 +1,19 @@
 import { memo, React, useCallback, useEffect }  from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './App.css';
 import Playfield from './Playfield';
 import ButtonElements from './ButtonElements';
 import { moveCharacters } from './RabbitWolfGameClass';
 import { updateBoard } from './redux/features/boardsReducerSlice';
+import { selectedInterval } from './redux/features/moveInterval';
 
 const GameBoard = memo(({ boardData }) => {
 
     const dispatch = useDispatch();
+
+    const MOVEMENT_INTERVAL = useSelector(selectedInterval);
+    console.log(MOVEMENT_INTERVAL);
 
     const CELL_SIZE = 60;
     const WIDTH_INDEX = 44;
@@ -35,7 +39,7 @@ const GameBoard = memo(({ boardData }) => {
     useEffect(() => {
         let interval;
         if(WINNER === undefined){
-            interval = setInterval(makeUpdateBoard, 3000);
+            interval = setInterval(makeUpdateBoard, MOVEMENT_INTERVAL * 1000);
         }
         return () => clearInterval(interval);       
     });

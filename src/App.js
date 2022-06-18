@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import './App.css';
 import Options from "./Options";
 import GameBoard from "./GameBoard";
-import { createCurrentMatrix, generateId, moveCharacters } from './RabbitWolfGameClass';
+import { createCurrentMatrix, generateId } from './RabbitWolfGameClass';
 import { gameFieldStatus, makeGameField } from "./redux/features/gameReducerSlice";
+import { selectInterval } from "./redux/features/moveInterval";
 import { selectedSize } from "./redux/features/sizeReducerSlice";
 import { selectedBoard } from './redux/features/boardReducerSlice';
 import { selectedBoards } from './redux/features/boardsReducerSlice';
@@ -30,7 +31,16 @@ const App = () => {
     <div className="App">
         {
           !MAKE_GAME.makeGameField
-          && <button className="newGameBtn" onClick={() => dispatch(gameFieldStatus(true))}>New Game</button>
+          &&  <div className="newGame">
+                <form onSubmit={(event) => {
+                  event.preventDefault();
+                  dispatch(gameFieldStatus(true))
+                  }}>
+                  <input type='submit' className="newGameBtn" value='New Game'/>
+                  <label className="checkMovement">Choose time of the wolve's movement interval</label>
+                  <input type='number' min='1' max='10' onChange={(event) => dispatch(selectInterval(Number(event.target.value)))}/>
+                </form>  
+              </div>
         }
 
         <div className="container">
