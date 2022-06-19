@@ -1,7 +1,7 @@
 import { combineReducers, createStore } from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { gameFieldReducer, initialGameField } from "../features/gameReducerSlice";
-import { moveReducer, initialInterval } from "../features/moveInterval";
+import { moveReducer, initialInterval } from "../features/intervalReducerSlice";
 import { sizeReducer, initialSize } from "../features/sizeReducerSlice";
 import { boardsReducer } from "../features/boardsReducerSlice";
 

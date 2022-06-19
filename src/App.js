@@ -6,7 +6,7 @@ import Options from "./Options";
 import GameBoard from "./GameBoard";
 import { createCurrentMatrix, generateId } from './RabbitWolfGameClass';
 import { gameFieldStatus, makeGameField } from "./redux/features/gameReducerSlice";
-import { selectInterval } from "./redux/features/moveInterval";
+import { selectInterval } from "./redux/features/intervalReducerSlice";
 import { selectedSize } from "./redux/features/sizeReducerSlice";
 import { selectedBoard } from './redux/features/boardReducerSlice';
 import { selectedBoards } from './redux/features/boardsReducerSlice';

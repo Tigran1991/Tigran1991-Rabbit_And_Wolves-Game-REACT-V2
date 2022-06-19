@@ -6,7 +6,7 @@ import Playfield from './Playfield';
 import ButtonElements from './ButtonElements';
 import { moveCharacters } from './RabbitWolfGameClass';
 import { updateBoard } from './redux/features/boardsReducerSlice';
-import { selectedInterval } from './redux/features/moveInterval';
+import { selectedInterval } from './redux/features/intervalReducerSlice';
 
 const GameBoard = memo(({ boardData }) => {
 
