@@ -271,8 +271,7 @@ export const moveCharacters = (moveDirection, matrix, size) => {
 
   const POSITIONS = getCharactersPositions(moveDirection);
 
-  const gameResult = () => {
-    let winnerCharacter;
+  const gameResult = (winnerCharacter) => {
 
     if(POSITIONS.wolvesCurrentPositions === null){
       winnerCharacter = decideGameCourse();

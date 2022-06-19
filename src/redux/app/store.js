@@ -16,6 +16,7 @@ const store = createStore(
     gameField: initialGameField,
     moveingInterval: initialInterval,
     currentSize: initialSize,
-  },composeWithDevTools());
+  },
+  composeWithDevTools());
 
 export default store;

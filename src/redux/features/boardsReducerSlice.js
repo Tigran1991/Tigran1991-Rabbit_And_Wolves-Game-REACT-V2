@@ -9,7 +9,11 @@ export const boardsReducer = (state = [], action) => {
       if (board.id === action.payload.id) {
         board.matrix = action.payload.matrix;
         board.winner = action.payload.winner;
-        return {...board, matrix: action.payload.matrix, winner: action.payload.winner};
+        return {...board,
+          matrix: action.payload.matrix,
+          winner: action.payload.winner,
+          button: action.payload.button
+        };
       }
       return board;
     });
@@ -30,6 +34,7 @@ export const updateBoard = (updatedValues) => {
       size: updatedValues.size,
       matrix: updatedValues.matrix,
       winner: updatedValues.winner,
+      button: updatedValues.button,
     },
   };
 }
