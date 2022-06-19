@@ -2,6 +2,7 @@ import { memo, React, useCallback, useEffect }  from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './App.css';
+import { INITIAL_PARAMETERS } from './RabbitWolfGameClass';
 import Playfield from './Playfield';
 import ButtonElements from './ButtonElements';
 import { moveCharacters } from './RabbitWolfGameClass';
@@ -13,10 +14,6 @@ const GameBoard = memo(({ boardData }) => {
     const dispatch = useDispatch();
 
     const MOVEMENT_INTERVAL = useSelector(selectedInterval);
-
-    const CELL_SIZE = 60;
-    const WIDTH_INDEX = 44;
-    const HEIGHT_INDEX = 83;
 
     const ID = boardData.id;
     const SIZE = boardData.size;
@@ -47,8 +44,8 @@ const GameBoard = memo(({ boardData }) => {
     });
 
     const boardStyle = {
-        width: CELL_SIZE * SIZE + WIDTH_INDEX,
-        height: CELL_SIZE * SIZE + HEIGHT_INDEX,
+        width: INITIAL_PARAMETERS.cellSize * SIZE + INITIAL_PARAMETERS.widthIndex,
+        height: INITIAL_PARAMETERS.cellSize * SIZE + INITIAL_PARAMETERS.heightIndex,
     }
 
     return (

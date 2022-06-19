@@ -22,6 +22,12 @@ const FENCE = 4;
 const X = 0,
   Y = 1;
 
+export const INITIAL_PARAMETERS = {
+  cellSize: 60,
+  widthIndex: 44,
+  heightIndex: 83,
+}
+
 const MOVE_DIRECTION = {
   "move-right": [0, 1],
   "move-bottom": [1, 0],
@@ -246,8 +252,6 @@ export const moveCharacters = (moveDirection, matrix, size) => {
       rabbitNewPosition,
     };
   };
-
-  
 
   const determineWinnerCharacter = () => {
     const WOLF_COUNT = (size * 40) / 100;
